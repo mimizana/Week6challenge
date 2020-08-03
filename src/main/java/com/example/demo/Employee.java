@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -8,15 +9,19 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Departement> departements;
+
+
     private String firstName;
     private String lastName;
     private String jobTitle;
-    private String departement;
     private boolean employed;
 
-    @ManyToMany
-    private Set<Departement> employees;
+    public Employee() {
 
+    }
 
     public long getId() {
         return id;
@@ -24,6 +29,14 @@ public class Employee {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Set<Departement> getDepartements() {
+        return departements;
+    }
+
+    public void setDepartements(Set<Departement> departements) {
+        this.departements = departements;
     }
 
     public String getFirstName() {
@@ -50,14 +63,6 @@ public class Employee {
         this.jobTitle = jobTitle;
     }
 
-    public String getDepartement() {
-        return departement;
-    }
-
-    public void setDepartement(String departement) {
-        this.departement = departement;
-    }
-
     public boolean isEmployed() {
         return employed;
     }
@@ -65,12 +70,10 @@ public class Employee {
     public void setEmployed(boolean employed) {
         this.employed = employed;
     }
-
-    public Set<Departement> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(Set<Departement> employees) {
-        this.employees = employees;
+    public void addDepartement(Departement departement){
+        if (this.departements==null){
+            this.departements = new HashSet<Departement>();
+        }
+        this.departements.add(departement);
     }
 }

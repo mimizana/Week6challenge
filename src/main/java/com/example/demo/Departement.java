@@ -10,11 +10,14 @@ public class Departement {
     private long id;
     private String name;
 
-    @ManyToMany(mappedBy = "departements")
-    private Set<Employee>employees;
+    @ManyToMany(mappedBy = "departements", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    private Set<Employee> employees;
 
     public long getId() {
         return id;
+    }
+    public Departement(){
+
     }
 
     public void setId(long id) {
