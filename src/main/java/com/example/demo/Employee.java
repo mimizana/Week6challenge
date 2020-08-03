@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Employee {
@@ -13,9 +14,9 @@ public class Employee {
     private String departement;
     private boolean employed;
 
+    @ManyToMany
+    private Set<Departement> employees;
 
-    public Employee() {
-    }
 
     public long getId() {
         return id;
@@ -63,5 +64,13 @@ public class Employee {
 
     public void setEmployed(boolean employed) {
         this.employed = employed;
+    }
+
+    public Set<Departement> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Set<Departement> employees) {
+        this.employees = employees;
     }
 }

@@ -18,10 +18,6 @@ public class User{
     @Size(min=3)
     private String username;
 
-    @Column(name="email")
-    @NotEmpty
-    @NotNull
-    private String email;
 
     @Column(name="password")
     private String password;
@@ -43,12 +39,10 @@ public class User{
     }
 
     public User( @Size(min = 3) String username,
-                 @NotEmpty @NotNull String email, String password,
                  @NotEmpty @NotNull String firstName,
                  @NotEmpty @NotNull String lastName, boolean enabled) {
 
         this.username = username;
-        this.email = email;
         this.setPassword(password);
         this.firstName = firstName;
         this.lastName = lastName;
@@ -69,14 +63,6 @@ public class User{
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPassword() {
