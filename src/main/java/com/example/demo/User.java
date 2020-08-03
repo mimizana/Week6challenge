@@ -15,7 +15,7 @@ public class User{
     private long id;
 
     @Column(name="username")
-    @Size(min=3)
+    @Size(min=2)
     private String username;
 
 
@@ -38,7 +38,7 @@ public class User{
     public User( ) {
     }
 
-    public User( @Size(min = 3) String username,
+    public User( @Size(min = 2) String username,
                  @NotEmpty @NotNull String firstName,
                  @NotEmpty @NotNull String lastName, boolean enabled) {
 

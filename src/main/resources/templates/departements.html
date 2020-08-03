@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -8,6 +8,24 @@
 </head>
 <body>
 <div th:replace="base :: navlinksfg"></div>
+
+<table>
+    <tr>
+        <th>Name of the Departement</th>
+
+    </tr>
+    <tr th:each="departement : ${departements}">
+        <td th:text="${departement.name}"></td>
+
+        <td>
+            <button><a sec:authorize="hasRole('ADMIN')" th:href="@{/detailDepartement/{id}(id=${department.id})}">Detail</a></button>
+            <button><a sec:authorize="hasRole('ADMIN')" th:href="@{/updateDepartement/{id}(id=${department.id})}">Update</a></button>
+        </td>
+    </tr>
+
+
+
+</table>
 
 <div th:replace="base ::footerfg"></div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
