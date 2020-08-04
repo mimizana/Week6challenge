@@ -9,25 +9,26 @@
     <link rel="stylesheet" href="styles/main.css"/>
 </head>
 <body>
-
-<h1 style="text-align:center">Login Page</h1>
-
-<div th:if="${param.logout}">You have been logged out.</div>
-<div th:if="${param.error}">
-    Invalid username or password!
-</div>
-
-<form th:action="@{/login}" method="post">
-    <div>
-        <label>Username: </label>
-        <input type="text" name="username" />
-    </div>
-    <div>
-        <label>Password: </label>
-        <input type="password" name="password"/>
-    </div>
-    <input type="submit" value="Sign in" />
-</form>
+<div th:replace="base :: navlinksfg"></div>
+<h2style="text-align:center">>All Employees in [[${department.name}]] Department</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Last Name</th>
+        <th>First Name</th>
+        <th>Job Title</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="employee : ${department.users}">
+        <td>[[${employee.lastName}]]</td>
+        <td>[[${employee.firstName}]]</td>
+        <td>[[${employee.jobTitle}]]</td>
+        <td><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/updateUser/{id}(id=${user.id})}">Update</a></td>
+    </tr>
+    </tbody>
+</table>
 
 
 

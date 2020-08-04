@@ -15,9 +15,13 @@ public class User{
     private long id;
 
     @Column(name="username")
-    @Size(min=2)
+    @Size(min=3)
     private String username;
 
+    @Column(name="email")
+    @NotEmpty
+    @NotNull
+    private String email;
 
     @Column(name="password")
     private String password;
@@ -34,15 +38,22 @@ public class User{
 
     @Column(name="enabled")
     private boolean enabled;
+    @Column (name="job_title")
+    private String jobTitle;
+
+    @ManyToOne
+    private Department department;
 
     public User( ) {
     }
 
-    public User( @Size(min = 2) String username,
+    public User( @Size(min = 3) String username,
+                 @NotEmpty @NotNull String email, String password,
                  @NotEmpty @NotNull String firstName,
                  @NotEmpty @NotNull String lastName, boolean enabled) {
 
         this.username = username;
+        this.email = email;
         this.setPassword(password);
         this.firstName = firstName;
         this.lastName = lastName;
@@ -63,6 +74,14 @@ public class User{
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -99,6 +118,22 @@ public class User{
     }
     public void clearPassword(){
         this.password="";
+    }
+
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }
 

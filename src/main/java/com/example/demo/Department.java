@@ -4,20 +4,21 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Departement {
+public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
     private String name;
 
-    @ManyToMany(mappedBy = "departements", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    private Set<Employee> employees;
+    @OneToMany(mappedBy = "department")
+    private Set<User> users;
+
+    public Department() {
+    }
 
     public long getId() {
         return id;
-    }
-    public Departement(){
-
     }
 
     public void setId(long id) {
@@ -32,11 +33,11 @@ public class Departement {
         this.name = name;
     }
 
-    public Set<Employee> getEmployees() {
-        return employees;
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setEmployees(Set<Employee> employees) {
-        this.employees = employees;
+    public void setEmployees(Set<User> users) {
+        this.users = users;
     }
 }

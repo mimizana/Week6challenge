@@ -9,27 +9,19 @@
     <link rel="stylesheet" href="styles/main.css"/>
 </head>
 <body>
+<div th:replace="base :: navlinksfg"></div>
+<h1>All Departments</h1>
+<table>
+    <tbody>
+    <tr th:each="department : ${departments}">
+        <td>[[${department.name}]]</td>
+        <td><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/updateDepart/{id}(id=${department.id})}">Update</a></td>
+        <td><a sec:authorize="isAuthenticated()" th:href="@{/showDepart/{id}(id=${department.id})}">Show</a></td>
+    </tr>
+    </tbody>
+</table>
 
-<h1 style="text-align:center">Login Page</h1>
-
-<div th:if="${param.logout}">You have been logged out.</div>
-<div th:if="${param.error}">
-    Invalid username or password!
-</div>
-
-<form th:action="@{/login}" method="post">
-    <div>
-        <label>Username: </label>
-        <input type="text" name="username" />
-    </div>
-    <div>
-        <label>Password: </label>
-        <input type="password" name="password"/>
-    </div>
-    <input type="submit" value="Sign in" />
-</form>
-
-
+<div th:replace="base :: footerfg"></div>
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -42,4 +34,3 @@
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
 </body>
-</html>
